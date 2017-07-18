@@ -6,7 +6,7 @@ Erlang+Websocket实现的聊天室
 
 初始化 erlang.mk
 
-cd /erlang_server/libs/makefile
+cd /libs/mk
 
  wget https://raw.githubusercontent.com/ninenines/erlang.mk/master/erlang.mk
  
