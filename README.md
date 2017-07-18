@@ -8,6 +8,15 @@ Erlang+Websocket实现的聊天室
 
 cd /libs/mk
 
- wget https://raw.githubusercontent.com/ninenines/erlang.mk/master/erlang.mk
+wget https://raw.githubusercontent.com/ninenines/erlang.mk/master/erlang.mk
  
 make -f erlang.mk bootstrap bootstrap-rel
+
+
+
+cd /
+
+make run
+
+通过浏览器访问：http://192.168.9.10:8088/
+
