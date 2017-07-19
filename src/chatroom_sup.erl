@@ -1,4 +1,4 @@
-%% Feel free to use, reuse and abuse the code in this file.
+%% Author: github.com/jomch
 
 %% @private
 -module(chatroom_sup).

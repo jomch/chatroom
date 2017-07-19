@@ -1,9 +1,10 @@
-%% Feel free to use, reuse and abuse the code in this file.
+%% Author: github.com/jomch
 
 %% @private
 -module(chatroom_app).
 -behaviour(application).
 
+%% ets table sysconfig
 -define(ETS_SYSCONFIG,sysconfig).
 
 %% API.

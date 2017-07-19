@@ -1,3 +1,5 @@
+%% Author: github.com/jomch
+
 -module(ws_handler).
 
 -export([init/2]).
