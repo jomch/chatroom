@@ -20,9 +20,5 @@ start_link() ->
 
 init([]) ->
 
-	%% mysql connect test
-	mysql:start_link(p1, "localhost", "root", "123456", "test"),
-	mysql:fetch(p1, <<"INSERT INTO t1 (id, msg) VALUES (NULL, 'from')">>),
-
 	Procs = [],
 	{ok, {{one_for_one, 10, 10}, Procs}}.
