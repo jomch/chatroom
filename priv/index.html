@@ -26,8 +26,8 @@
           wsHost = $("#server").val()
           websocket = new WebSocket(wsHost);
           showScreen('<b>Connecting to: ' +  wsHost + '</b>'); 
-          websocket.onopen = function(evt) { onOpen(evt) }; 
-          websocket.onclose = function(evt) { onClose(evt) }; 
+          websocket.onopen = function(evt) { alert((new Date()).getMinutes()+':'+(new Date()).getSeconds());onOpen(evt); }; 
+          websocket.onclose = function(evt) { alert((new Date()).getMinutes()+':'+(new Date()).getSeconds());onClose(evt) }; 
           websocket.onmessage = function(evt) { onMessage(evt) }; 
           websocket.onerror = function(evt) { onError(evt) }; 
       };  
@@ -65,7 +65,7 @@
       };  
 
       function onMessage(evt) { 
-          showScreen('<span style="color: blue;">RESPONSE: ' + evt.data+ '</span>'); 
+          showScreen('<span style="color: blue;">' + evt.data+ '</span>'); 
       };  
 
       function onError(evt) {

@@ -37,7 +37,7 @@ start(_Type, _Args) ->
 	MysqlPasswd = get_mysql_config(passwd),
 	MysqlDB = get_mysql_config(db),
 	mysql:start_link(p1, MysqlHost, MysqlUser, MysqlPasswd, MysqlDB),
-	mysql:fetch(p1, <<"INSERT INTO t1 (id, msg) VALUES (NULL, 'from')">>),
+	%%mysql:fetch(p1, <<"INSERT INTO t1 (id, msg) VALUES (NULL, 'from')">>),
 
 	%% Cowboy初始化
 	Dispatch = cowboy_router:compile([
@@ -61,7 +61,7 @@ get_mysql_config(Key) when is_atom(Key) ->
 		false ->
 			[];
 		{_, Val} -> 
-			io:format("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXVar: ~s",[Val]),
+			%%io:format("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXVar: ~s",[Val]),
 			Val
 	end;
 get_mysql_config(_) -> [].
