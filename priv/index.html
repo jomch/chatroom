@@ -1,6 +1,6 @@
 <html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Websocket client</title>
     <script src="static/jquery.min.js"></script>
     <script type="text/javascript">
@@ -18,11 +18,10 @@
               connect();
           };
               $("#connected").hide(); 	
-              $("#content").hide(); 	
-      };
+              $("#content").hide(); 
+      }
 
-      function connect()
-      {
+      function connect() {
           wsHost = $("#server").val()
           websocket = new WebSocket(wsHost);
           showScreen('<b>Connecting to: ' +  wsHost + '</b>'); 
@@ -30,11 +29,11 @@
           websocket.onclose = function(evt) { onClose(evt) }; 
           websocket.onmessage = function(evt) { onMessage(evt) }; 
           websocket.onerror = function(evt) { onError(evt) }; 
-      };  
+      }
       
       function disconnect() {
           websocket.close();
-      }; 
+      }
 
       function toggle_connection(){
           if(websocket.readyState == websocket.OPEN){
@@ -42,7 +41,7 @@
           } else {
               connect();
           };
-      };
+      }
 
       function sendTxt() {
           if(websocket.readyState == websocket.OPEN){
@@ -52,34 +51,42 @@
           } else {
                showScreen('websocket is not connected'); 
           };
-      };
+      }
 
       function onOpen(evt) { 
-          showScreen('<span style="color: green;">CONNECTED </span>'); 
+          showScreen('<span style="color: green;">CONNECTED ['+getNowTime()+']</span>');
           $("#connected").fadeIn('slow');
           $("#content").fadeIn('slow');
-      };  
+      }
 
-      function onClose(evt) { 
-          showScreen('<span style="color: red;">DISCONNECTED </span>');
-      };  
+      function onClose(evt) {
+          showScreen('<span style="color: red;">DISCONNECTED ['+getNowTime()+']</span>');
+      }
 
       function onMessage(evt) { 
           showScreen('<span style="color: blue;">' + evt.data+ '</span>'); 
-      };  
+      }
 
       function onError(evt) {
           showScreen('<span style="color: red;">ERROR: ' + evt.data+ '</span>');
-      };
+      }
 
       function showScreen(txt) { 
-          $('#output').prepend('<p>' + txt + '</p>');
-      };
+          $('#output').prepend('<p>' + txt + ' ['+getNowTime()+']</p>');
+      }
 
-      function clearScreen() 
-      { 
+      function clearScreen() { 
           $('#output').html("");
-      };
+      }
+
+	  function getNowTime() {
+			var date = new Date();
+			var h = date.getHours();
+			var i = date.getMinutes();
+			var s = date.getSeconds();
+			return (h<10?'0'+h:h)+':'+(i<10?'0'+i:i)+':'+(s<10?'0'+s:s);
+	  }
+
     </script>
   </head>
 
