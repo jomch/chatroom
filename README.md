@@ -1,7 +1,7 @@
 # chatroom
 Erlang+Websocket实现的聊天室
 
-项目域名：http://englishzone.cn
+项目演示：https://englishzone.cn
 
 
 初始化 erlang.mk
