@@ -4,6 +4,9 @@
 -module(chatroom_app).
 -behaviour(application).
 
+%% root dir
+-define(ROOT_DIR,"/data/webapps/chatroom/").
+
 %% ets table sysconfig
 -define(ETS_SYSCONFIG,sysconfig).
 
@@ -17,7 +20,7 @@
 start(_Type, _Args) ->
 
 	%% 初始化mysql
-	{ok,ConfigData} = file:consult("/data/webapps/chatroom/config/mysql.config"),
+	{ok,ConfigData} = file:consult(?ROOT_DIR"config/mysql.config"),
 	Info = ets:info(?ETS_SYSCONFIG),
 	case Info of
 		undefined -> 

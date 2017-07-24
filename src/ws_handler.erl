@@ -12,6 +12,13 @@ init(Req, Opts) ->
 
 
 websocket_init(State) ->
+
+	%%Pid = self(),
+	%%{ok,F} = file:open("/data/webapps/chatroom/debug.log",write).
+
+	%%code:add_patha("/data/webapps/chatroom/ebin"),
+	%%common:logger("abc\r\n"),
+
 	erlang:start_timer(1000, self(), <<"Welcome to englishzone.cn">> ),
 	{ok, State}.
 
@@ -21,13 +28,13 @@ websocket_handle({text, Msg}, State) ->
 	case Msg of
 
 		<<"aa">> ->
-			{reply, {text, << "Server say: ", <<"Hello,aa">>/binary >>}, State};
+			{reply, {text, << "Server response: ", <<"Hello,aa">>/binary >>}, State};
 
 		<<"bb">> ->
-			{reply, {text, << "Server say: ", <<"Hello,aa">>/binary >>}, State};
+			{reply, {text, << "Server response: ", <<"Hello,aa">>/binary >>}, State};
 
 		_ ->
-			{reply, {text, << "Server say: ", Msg/binary >>}, State}
+			{reply, {text, << "Server response: ", Msg/binary >>}, State}
 			
 	end;
 
