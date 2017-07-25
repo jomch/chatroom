@@ -13,13 +13,12 @@ init(Req, Opts) ->
 
 websocket_init(State) ->
 
-	%%Pid = self(),
-	%%{ok,F} = file:open("/data/webapps/chatroom/debug.log",write).
+	Pid = self(),
 
-	%%code:add_patha("/data/webapps/chatroom/ebin"),
-	%%common:logger("abc\r\n"),
+	common:logger(pid_to_list(Pid)++"\r\n"),
 
-	erlang:start_timer(1000, self(), <<"Welcome to englishzone.cn">> ),
+	erlang:start_timer(1000, Pid, <<"Welcome to Chatroom">> ),
+
 	{ok, State}.
 
 
