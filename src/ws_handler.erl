@@ -41,9 +41,9 @@ websocket_handle(_Data, State) ->
 	{ok, State}.
 
 
-%%websocket_info({timeout, _Ref, Msg}, State) ->
-%%	erlang:start_timer(1000, self(), <<"This is server message.">>),
-%%	{reply, {text, Msg}, State};
+websocket_info({timeout, _Ref, Msg}, State) ->
+	%%erlang:start_timer(1000, self(), <<"This is server message.">>),
+	{reply, {text, Msg}, State};
 
 websocket_info(_Info, State) ->
 	{ok, State}.
