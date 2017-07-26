@@ -33,6 +33,8 @@ start(_Type, _Args) ->
 			ets:insert(?ETS_SYSCONFIG, Term)
 			end, ConfigData),
 
+	%% 初始化 websocket ets表
+	ws_store:init(),
 
 	%% mysql connect test
 	MysqlHost = get_mysql_config(host),

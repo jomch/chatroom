@@ -1,4 +1,7 @@
+%% Author: github.com/jomch
+
 -module(ws_store).
+
 -define(WS_TABLE, chatroom_ws_store).
 
 %% API

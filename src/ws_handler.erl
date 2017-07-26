@@ -5,7 +5,7 @@
 -behaviour(cowboy_websocket).
 
 -export([init/2]).
--export([websocket_init/3]).
+-export([websocket_init/1]).
 -export([websocket_handle/2]).
 -export([websocket_info/2]).
 %%-export([websocket_terminate/3]).
@@ -20,9 +20,10 @@ init(Req, Opts) ->
 %%	erlang:start_timer(1000, Pid, <<"Welcome to Chatroom">> ),
 %%	{ok, State}.
 
-websocket_init(_TransportName, Req, _Opts) ->
-	ws_store:add(<<"room1">>, self()),
-	{ok, Req, undefined_state}.
+websocket_init(State) ->
+	Pid = self(),
+	ws_store:add(<<"room1">>, pid_to_list(Pid)),
+	{ok, State}.
 
 
 %% old code

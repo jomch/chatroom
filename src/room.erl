@@ -12,8 +12,7 @@
 -export([terminate/2]).
 -export([code_change/3]).
 
--record(state, {id
-}).
+-record(state, {id}).
 
 %% API.
 
@@ -31,7 +30,8 @@ handle_call(_Request, _From, State) ->
 
 handle_cast({msg, Text}, State) ->
 	ClientList = ws_store:lookup(<<"room1">>),
-	send(ClientList, {msg, Text}),
+	%%send(ClientList, {msg, Text}),
+	send(ClientList, {reply, {text, << "Server: ", Text/binary >>}, State}),
 	{noreply, State}.
 
 handle_info(_Msg, State) ->
@@ -46,5 +46,8 @@ code_change(_OldVsn, State, _Extra) ->
 send([], _) ->
 	ok;
 send([{_, Ws} | Last], Msg) ->
-	Ws ! Msg,
+
+	common:logger(Ws++"\r\n"),
+
+	list_to_pid(Ws) ! Msg,
 	send(Last, Msg).
