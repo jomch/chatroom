@@ -30,8 +30,8 @@ handle_call(_Request, _From, State) ->
 
 handle_cast({msg, Text}, State) ->
 	ClientList = ws_store:lookup(<<"room1">>),
-	%%send(ClientList, {msg, Text}),
-	send(ClientList, {reply, {text, << "Server: ", Text/binary >>}, State}),
+	send(ClientList, {msg, Text}),
+	%%send(ClientList, {reply, {text, << "Server: ", Text/binary >>}, State}),
 	{noreply, State}.
 
 handle_info(_Msg, State) ->
@@ -49,5 +49,6 @@ send([{_, Ws} | Last], Msg) ->
 
 	common:logger(Ws++"\r\n"),
 
-	list_to_pid(Ws) ! Msg,
+	list_to_pid(Ws) ! Msg/binary,
+
 	send(Last, Msg).
