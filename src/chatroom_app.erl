@@ -19,8 +19,8 @@
 %% API.
 start(_Type, _Args) ->
 
-	%% 初始化mysql
 	{ok,ConfigData} = file:consult(?ROOT_DIR"config/mysql.config"),
+
 	Info = ets:info(?ETS_SYSCONFIG),
 	case Info of
 		undefined -> 
