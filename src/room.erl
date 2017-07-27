@@ -16,30 +16,22 @@
 
 -record(state, {id}).
 
-%% API.
-
 -spec start_link() -> {ok, pid()}.
 start_link() ->
 	gen_server:start_link( {local, room}, ?MODULE, [<<"room1">>], []). %% 第3个参数传给 init([Id]) 方法
 
-%% gen_server.
-
 init([Id]) ->
-	common:logger("room->init: "++binary_to_list(Id)++" \r\n"),
 	{ok, #state{id = Id}}.
 
 handle_call(_Request, _From, State) ->
-	common:logger("room->handle_call: "++binary_to_list(_From)++"\r\n"),
 	{reply, ignored, State}.
 
 handle_cast({msg, Text}, State) ->
-	common:logger("room->handle_cast: "++binary_to_list(Text)++"\r\n"),
 	ClientList = ws_store:lookup(<<"room1">>),
 	send(ClientList, {timeout, self(), Text}),
 	{noreply, State}.
 
 handle_info(_Msg, State) ->
-	common:logger("room->handle_info\r\n"),
 	{noreply, State}.
 
 terminate(_Reason, _State) ->
