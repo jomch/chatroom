@@ -13,18 +13,10 @@
 init(Req, Opts) ->
 	{cowboy_websocket, Req, Opts}.
 
-%% old code
-%%websocket_init(State) ->
-%%	Pid = self(),
-%%	common:logger("ws_handler pid: "++pid_to_list(Pid)++"\r\n"),
-%%	erlang:start_timer(1000, Pid, <<"Welcome to Chatroom">> ),
-%%	{ok, State}.
-
 websocket_init(State) ->
 	Pid = self(),
 	ws_store:add(<<"room1">>, pid_to_list(Pid)),
 	{ok, State}.
-
 
 %% old code
 %%websocket_handle({text, Msg}, State) ->
@@ -45,12 +37,6 @@ websocket_handle({text, Msg}, State) ->
 websocket_handle(_Data, State) ->
 	{ok, State}.
 
-%% old code
-%%websocket_info({timeout, _Ref, Msg}, State) ->
-%%	%%erlang:start_timer(1000, self(), <<"This is server message.">>),
-%%	{reply, {text, Msg}, State};
-%%websocket_info(_Info, State) ->
-%%	{ok, State}.
 
 websocket_info({timeout, _Ref, Msg}, State) ->
 	{reply, {text, Msg}, State};
