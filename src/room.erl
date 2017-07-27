@@ -42,7 +42,7 @@ terminate(_Reason, _State) ->
 send([], _) ->
 	ok;
 send([{_, Ws} | Last], Msg) ->
-	common:logger("room->send: "++Ws++"\r\n"),
+	%%common:logger("room->send: "++Ws++"\r\n"),
 	Pid = list_to_pid(Ws),
 	Pid ! Msg, 
 	send(Last, Msg).
