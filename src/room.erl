@@ -29,7 +29,7 @@ handle_cast({msg, Text}, State) ->
 	ClientList = ws_store:lookup(<<"room1">>),
 
 	%% 给Websocket进程Pid发送消息，cowboy会回调ws_handler:websocket_info方法，
-	%% 所以 Msg 的格式需要匹配该方法的参数格式 websocket_info({timeout, _Ref, Msg}, State)
+	%% 所以 Msg 的格式需要匹配该方法的形参格式 websocket_info({timeout, _Ref, Msg}, State)
 	send(ClientList, {timeout, self(), Text}),
 	{noreply, State}.
 
