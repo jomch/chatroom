@@ -491,3 +491,8 @@ room->send: <0.424.0>
 chatroom_sup->start_link pid: <0.374.0>
 room->send: <0.384.0>
 room->send: <0.384.0>
+chatroom_sup->start_link pid: <0.374.0>
+chatroom_sup->start_link pid: <0.374.0>
+chatroom_sup->start_link pid: <0.374.0>
+chatroom_sup->start_link pid: <0.374.0>
+chatroom_sup->start_link pid: <0.374.0>
