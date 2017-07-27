@@ -17,7 +17,7 @@ start_link() ->
 
 	{ok,Pid} = supervisor:start_link({local, ?MODULE}, ?MODULE, []),
 
-	common:logger("chatroom_sup pid: "++pid_to_list(Pid)++"\r\n"),
+	common:logger("chatroom_sup->start_link pid: "++pid_to_list(Pid)++"\r\n"),
 
 	{ok,Pid}.
 
@@ -28,4 +28,4 @@ init([]) ->
 	%% Procs = [],
 	Procs = [{room, {room, start_link, []}, permanent, 2000, worker, [room]}], %% 启动room子进程
 
-	{ok, {{one_for_one, 10, 10}, Procs}}.
+	{ok, {{one_for_one, 0, 1}, Procs}}.

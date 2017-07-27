@@ -174,3 +174,241 @@ chatroom_sup pid: <0.374.0>
 chatroom_sup pid: <0.374.0>
 chatroom_sup pid: <0.374.0>
 <0.384.0>
+chatroom_sup pid: <0.374.0>
+<0.386.0>
+<0.386.0>
+chatroom_sup pid: <0.374.0>
+chatroom_sup pid: <0.374.0>
+chatroom_sup pid: <0.374.0>
+<0.385.0>
+<0.385.0>
+<0.385.0>
+chatroom_sup pid: <0.374.0>
+chatroom_sup pid: <0.374.0>
+chatroom_sup pid: <0.374.0>
+chatroom_sup pid: <0.374.0>
+room->handle_cast: aa
+<0.383.0>
+chatroom_sup pid: <0.374.0>
+<0.383.0>
+<0.383.0>
+<0.383.0>
+<0.383.0>
+<0.383.0>
+<0.383.0>
+<0.383.0>
+chatroom_sup pid: <0.374.0>
+<0.383.0>
+<0.386.0>
+<0.383.0>
+<0.386.0>
+<0.383.0>
+<0.386.0>
+chatroom_sup pid: <0.374.0>
+<0.383.0>
+<0.383.0>
+<0.383.0>
+chatroom_sup pid: <0.374.0>
+<0.387.0>
+<0.387.0>
+<0.387.0>
+chatroom_sup pid: <0.374.0>
+room->handle_cast: aaa
+<0.384.0>
+chatroom_sup pid: <0.374.0>
+room->handle_cast: aa
+<0.384.0>
+chatroom_sup pid: <0.374.0>
+room->handle_cast: aa
+room->send:<0.384.0>
+room->send:<0.387.0>
+room->handle_cast: bb
+room->send:<0.384.0>
+room->send:<0.387.0>
+room->init: 
+chatroom_sup pid: <0.374.0>
+room->handle_cast: aa
+room->send: <0.385.0>
+room->send: <0.389.0>
+room->handle_cast: bb
+room->send: <0.385.0>
+room->send: <0.389.0>
+room->init: room1 
+chatroom_sup pid: <0.374.0>
+room->handle_cast: aa
+room->send: <0.385.0>
+room->handle_cast: aa
+room->send: <0.385.0>
+room->send: <0.519.0>
+room->handle_cast: aa
+room->send: <0.385.0>
+room->send: <0.519.0>
+room->send: <0.530.0>
+room->handle_cast: aaaa
+room->send: <0.385.0>
+room->send: <0.519.0>
+room->send: <0.530.0>
+room->handle_cast: ss
+room->send: <0.385.0>
+room->send: <0.519.0>
+room->send: <0.530.0>
+room->send: <0.546.0>
+room->send: <0.549.0>
+room->handle_cast: ssaaa
+room->send: <0.385.0>
+room->send: <0.519.0>
+room->send: <0.530.0>
+room->send: <0.546.0>
+room->send: <0.549.0>
+room->init: room1 
+chatroom_sup->start_link pid: <0.374.0>
+room->handle_cast: aa
+room->send: <0.385.0>
+room->init: room1 
+room->init: room1 
+chatroom_sup->start_link pid: <0.374.0>
+room->init: room1 
+chatroom_sup->start_link pid: <0.374.0>
+room->handle_cast: aa
+room->send: <0.385.0>
+room->handle_cast: aa
+room->send: <0.385.0>
+room->send: <0.391.0>
+room->handle_cast: aa
+room->send: <0.385.0>
+room->send: <0.391.0>
+room->send: <0.400.0>
+room->handle_cast: aa
+room->send: <0.385.0>
+room->send: <0.391.0>
+room->send: <0.400.0>
+room->send: <0.409.0>
+room->handle_cast: aa
+room->send: <0.385.0>
+room->send: <0.391.0>
+room->send: <0.400.0>
+room->send: <0.409.0>
+room->handle_cast: aa
+room->send: <0.385.0>
+room->send: <0.391.0>
+room->send: <0.400.0>
+room->send: <0.409.0>
+room->handle_cast: aa
+room->send: <0.385.0>
+room->send: <0.391.0>
+room->send: <0.400.0>
+room->send: <0.409.0>
+room->handle_cast: aa
+room->send: <0.385.0>
+room->send: <0.391.0>
+room->send: <0.400.0>
+room->send: <0.409.0>
+room->handle_cast: aa
+room->send: <0.385.0>
+room->send: <0.391.0>
+room->send: <0.400.0>
+room->send: <0.409.0>
+room->handle_cast: aa
+room->send: <0.385.0>
+room->send: <0.391.0>
+room->send: <0.400.0>
+room->send: <0.409.0>
+room->handle_cast: aa
+room->send: <0.385.0>
+room->send: <0.391.0>
+room->send: <0.400.0>
+room->send: <0.409.0>
+room->handle_cast: aa
+room->send: <0.385.0>
+room->send: <0.391.0>
+room->send: <0.400.0>
+room->send: <0.409.0>
+room->handle_cast: aa
+room->send: <0.385.0>
+room->send: <0.391.0>
+room->send: <0.400.0>
+room->send: <0.409.0>
+room->handle_cast: aa
+room->send: <0.385.0>
+room->send: <0.391.0>
+room->send: <0.400.0>
+room->send: <0.409.0>
+room->handle_cast: aa
+room->send: <0.385.0>
+room->send: <0.391.0>
+room->send: <0.400.0>
+room->send: <0.409.0>
+room->handle_cast: aa
+room->send: <0.385.0>
+room->send: <0.391.0>
+room->send: <0.400.0>
+room->send: <0.409.0>
+room->handle_cast: aa
+room->send: <0.385.0>
+room->send: <0.391.0>
+room->send: <0.400.0>
+room->send: <0.409.0>
+room->handle_cast: aa
+room->send: <0.385.0>
+room->send: <0.391.0>
+room->send: <0.400.0>
+room->send: <0.409.0>
+room->handle_cast: aa
+room->send: <0.385.0>
+room->send: <0.391.0>
+room->send: <0.400.0>
+room->send: <0.409.0>
+room->handle_cast: aa
+room->send: <0.385.0>
+room->send: <0.391.0>
+room->send: <0.400.0>
+room->send: <0.409.0>
+room->handle_cast: aa
+room->send: <0.385.0>
+room->send: <0.391.0>
+room->send: <0.400.0>
+room->send: <0.409.0>
+room->handle_cast: aa
+room->send: <0.385.0>
+room->send: <0.391.0>
+room->send: <0.400.0>
+room->send: <0.409.0>
+room->handle_cast: aa
+room->send: <0.385.0>
+room->send: <0.391.0>
+room->send: <0.400.0>
+room->send: <0.409.0>
+room->handle_cast: aa
+room->send: <0.385.0>
+room->send: <0.391.0>
+room->send: <0.400.0>
+room->send: <0.409.0>
+room->handle_cast: aa
+room->send: <0.385.0>
+room->send: <0.391.0>
+room->send: <0.400.0>
+room->send: <0.409.0>
+room->init: room1 
+chatroom_sup->start_link pid: <0.374.0>
+room->init: room1 
+chatroom_sup->start_link pid: <0.374.0>
+room->init: room1 
+chatroom_sup->start_link pid: <0.374.0>
+room->init: room1 
+chatroom_sup->start_link pid: <0.374.0>
+room->handle_cast: aa
+room->send: <0.385.0>
+room->handle_cast: bb
+room->send: <0.385.0>
+room->handle_cast: aa
+room->send: <0.385.0>
+room->send: <0.394.0>
+room->handle_cast: bb
+room->send: <0.385.0>
+room->send: <0.394.0>
+room->handle_cast: ccc
+room->send: <0.385.0>
+room->send: <0.394.0>
+room->handle_cast: aaa
+room->send: <0.385.0>
+room->send: <0.394.0>
