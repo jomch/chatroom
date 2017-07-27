@@ -1,93 +1,92 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Websocket client</title>
-    <script src="static/jquery.min.js"></script>
+    <title>英语聊天室 - englishzone.cn</title>
+	<link href="static/css/bootstrap.min.css" rel="stylesheet">
+    <script src="static/js/jquery.min.js"></script>
     <script type="text/javascript">
-      
-      var websocket;
-      $(document).ready(init);
-      
-      function init() {
-          $('#server').val("ws://192.168.9.10:8088/websocket");
-          if(!("WebSocket" in window)){  
-              $('#status').append('<p><span style="color: red;">websockets are not supported </span></p>');
-              $("#navigation").hide();  
-          } else {
-              $('#status').append('<p><span style="color: green;">websockets are supported </span></p>');
-              connect();
-          };
-              $("#connected").hide(); 	
-              $("#content").hide(); 
-      }
 
-      function connect() {
-          wsHost = $("#server").val()
-          websocket = new WebSocket(wsHost);
-          showScreen('<b>Connecting to: ' +  wsHost + '</b>'); 
-          websocket.onopen = function(evt) { onOpen(evt); }; 
-          websocket.onclose = function(evt) { onClose(evt) }; 
-          websocket.onmessage = function(evt) { onMessage(evt) }; 
-          websocket.onerror = function(evt) { onError(evt) }; 
-      }
-      
-      function disconnect() {
-          websocket.close();
-      }
+	var ws;
+	var wsHost = "ws://192.168.9.10:8088/websocket";
 
-      function toggle_connection(){
-          if(websocket.readyState == websocket.OPEN){
-              disconnect();
-          } else {
-              connect();
-          };
-      }
+	$(function(){
+		if(!("WebSocket" in window)){  
+			$('#status').append('<p><span style="color: red;">websockets are not supported </span></p>');
+			$("#navigation").hide();  
+		} else {
+			$('#status').append('<p><span style="color: green;">websockets are supported </span></p>');
+			connect();
+		};
+		$("#connected").hide(); 	
+		$("#content").hide(); 
+	}
+    
+	function connect() {
+		ws = new WebSocket(wsHost);
+		showScreen('<b>Connecting to: ' +  wsHost + '</b>'); 
+		ws.onopen = function(evt) { onOpen(evt); }; 
+		ws.onclose = function(evt) { onClose(evt) }; 
+		ws.onmessage = function(evt) { onMessage(evt) }; 
+		ws.onerror = function(evt) { onError(evt) }; 
+	}
 
-      function sendTxt() {
-          if(websocket.readyState == websocket.OPEN){
-              txt = $("#send_txt").val();
-              websocket.send(txt);
-              showScreen('Client: ' + txt); 
-          } else {
-               showScreen('websocket is not connected'); 
-          };
-      }
+	function disconnect() {
+		ws.close();
+	}
 
-      function onOpen(evt) { 
-          showScreen('<span style="color: green;">CONNECTED </span>');
-          $("#connected").fadeIn('slow');
-          $("#content").fadeIn('slow');
-      }
+	function toggle_connection(){
+		if(ws.readyState == ws.OPEN){
+			disconnect();
+		} else {
+			connect();
+		}
+	}
 
-      function onClose(evt) {
-          showScreen('<span style="color: red;">DISCONNECTED </span>');
-      }
+	function sendTxt() {
+		if(ws.readyState == ws.OPEN){
+			txt = $("#send_txt").val();
+			ws.send(txt);
+			showScreen('Client: ' + txt); 
+		} else {
+			showScreen('websocket is not connected'); 
+		}
+	}
 
-      function onMessage(evt) { 
-          showScreen('<span style="color: blue;">' + evt.data+ '</span>'); 
-      }
+	function onOpen(evt) { 
+		showScreen('<span style="color: green;">CONNECTED </span>');
+		$("#connected").fadeIn('slow');
+		$("#content").fadeIn('slow');
+	}
 
-      function onError(evt) {
-          showScreen('<span style="color: red;">ERROR: ' + evt.data+ '</span>');
-      }
+	function onClose(evt) {
+		showScreen('<span style="color: red;">DISCONNECTED </span>');
+	}
 
-      function showScreen(txt) { 
-          $('#output').prepend('<p>' + txt + ' ['+getNowTime()+']</p>');
-      }
+	function onMessage(evt) { 
+		showScreen('<span style="color: blue;">' + evt.data+ '</span>'); 
+	}
 
-      function clearScreen() { 
-          $('#output').html("");
-      }
+	function onError(evt) {
+		showScreen('<span style="color: red;">ERROR: ' + evt.data+ '</span>');
+	}
 
-	  function getNowTime() {
-			var date = new Date();
-			var h = date.getHours();
-			var i = date.getMinutes();
-			var s = date.getSeconds();
-			return (h<10?'0'+h:h)+':'+(i<10?'0'+i:i)+':'+(s<10?'0'+s:s);
-	  }
+	function showScreen(txt) { 
+		$('#output').prepend('<p>' + txt + ' ['+getNowTime()+']</p>');
+	}
 
-    </script>
+	function clearScreen() { 
+		$('#output').html("");
+	}
+
+	function getNowTime() {
+		var date = new Date();
+		var h = date.getHours();
+		var i = date.getMinutes();
+		var s = date.getSeconds();
+		return (h<10?'0'+h:h)+':'+(i<10?'0'+i:i)+':'+(s<10?'0'+s:s);
+	}
+
+</script>
   </head>
 
   <body>
