@@ -43,9 +43,9 @@ start(_Type, _Args) ->
 	%% Cowboy初始化
 	Dispatch = cowboy_router:compile([
 		{'_', [
-			{"/", cowboy_static, {priv_file, chatroom, "index.html"}},
-			{"/websocket", ws_handler, []},
-			{"/static/[...]", cowboy_static, {priv_dir, chatroom, "static"}}
+			%%{"/", cowboy_static, {priv_file, chatroom, "index.html"}},
+			{"/websocket", ws_handler, []}
+			%%{"/static/[...]", cowboy_static, {priv_dir, chatroom, "static"}}
 		]}
 	]),
 	{ok, _} = cowboy:start_clear(http, [{port, 8088}], #{ env => #{dispatch => Dispatch} } ),
