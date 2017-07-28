@@ -32,7 +32,12 @@ websocket_init(State) ->
 %%	{ok, State}.
 
 websocket_handle({text, Msg}, State) ->
-	gen_server:cast(room, {msg, Msg}),
+
+	Msg1 = re:replace(Msg, <<"&">>, <<"\\&amp;">>, [{return,binary}]),
+	Msg2 = re:replace(Msg1, <<"<">>, <<"\\&lt;">>, [{return,binary}]),
+	Msg3 = re:replace(Msg2, <<">">>, <<"\\&gt;">>, [{return,binary}]),
+
+	gen_server:cast(room, {msg, Msg3}),
 	{ok, State};
 websocket_handle(_Data, State) ->
 	{ok, State}.

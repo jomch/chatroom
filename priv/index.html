@@ -1,32 +1,35 @@
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>英语聊天室 - englishzone.cn</title>
-	<link href="static/bootstrap.min.css" rel="stylesheet">
-    <script src="static/jquery.min.js"></script>
-    <script type="text/javascript">
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="Keywords" content="english,english news,how to learn english,英语学习网站,英语自学网">
+<meta name="Description" content="英语地带(englishzone.cn)，英语聊天室。">
+<title>chatroom v1.0 - englishzone.cn</title>
+<link href="static/bootstrap.min.css" rel="stylesheet">
+<script src="static/jquery.min.js"></script>
+<script type="text/javascript">
 
 	var ws;
-	var wsHost = "ws://192.168.9.10:8088/websocket";
+	var wsHost = "ws://182.92.163.109:8088/websocket";
+	var notSupported = 0;
 
 	$(function(){
 		if(!("WebSocket" in window)){  
-			$('#status').append('<p><span style="color: red;">websockets are not supported </span></p>');
-			$("#navigation").hide();  
+			showNotice('报歉，您的浏览器不支持WebSocket');
+			notSupported = 1;
 		} else {
-			$('#status').append('<p><span style="color: green;">websockets are supported </span></p>');
 			connect();
-		};
-		$("#connected").hide(); 	
-		$("#content").hide(); 
+		}
 	});
     
 	function connect() {
+		if( notSupported ) {
+			return false;
+		}
 		ws = new WebSocket(wsHost);
-		showScreen('<b>Connecting to: ' +  wsHost + '</b>'); 
 		ws.onopen = function(evt) { onOpen(evt); }; 
 		ws.onclose = function(evt) { onClose(evt) }; 
-		ws.onmessage = function(evt) { onMessage(evt) }; 
+		ws.onmessage = function(evt) { onMessage(evt) };
 		ws.onerror = function(evt) { onError(evt) }; 
 	}
 
@@ -42,36 +45,25 @@
 		}
 	}
 
-	function sendTxt() {
-		if(ws.readyState == ws.OPEN){
-			txt = $("#send_txt").val();
-			ws.send(txt);
-			showScreen('Client: ' + txt); 
-		} else {
-			showScreen('websocket is not connected'); 
-		}
-	}
-
 	function onOpen(evt) { 
-		showScreen('<span style="color: green;">CONNECTED </span>');
-		$("#connected").fadeIn('slow');
-		$("#content").fadeIn('slow');
+		showNotice('已连接服务器');
 	}
 
 	function onClose(evt) {
-		showScreen('<span style="color: red;">DISCONNECTED </span>');
+		showNotice('已断开服务器连接，<a href="#" onclick="connect()">重新连接</a>');
 	}
 
 	function onMessage(evt) { 
-		showScreen('<span style="color: blue;">' + evt.data+ '</span>'); 
+		showScreen(evt.data);
 	}
 
 	function onError(evt) {
-		showScreen('<span style="color: red;">ERROR: ' + evt.data+ '</span>');
+		showNotice(evt.data);
 	}
 
 	function showScreen(txt) { 
-		$('#output').prepend('<p>' + txt + ' ['+getNowTime()+']</p>');
+		$('#output').append('<h5>' + txt + ' ['+getNowTime()+']</h5>');
+		moveScrollToBotton();
 	}
 
 	function clearScreen() { 
@@ -86,6 +78,53 @@
 		return (h<10?'0'+h:h)+':'+(i<10?'0'+i:i)+':'+(s<10?'0'+s:s);
 	}
 
+	function showNotice(_info) {
+			$('#notice').html(_info);
+	}
+
+	function moveScrollToBotton() {
+		$('#scrollDiv').scrollTop($('#scrollDiv').prop("scrollHeight"));
+	}
+
+	function sendMessage() {
+
+		try{
+			if( !ws.OPEN ) {
+				// nothing
+			}
+		} catch (e) {
+			connect();
+		}
+
+		var nickname = $("#nickname").val().trim();
+		if( !nickname ) {
+			showNotice('请输入昵称');
+			return false;
+		}
+
+		if( nickname.length > 15 ) {
+			showNotice('昵称长度不能大于15个字符');
+			return false;	
+		}
+
+		var message = $("#message").val();
+		if( !message ) {
+			showNotice('请输入聊天内容');
+			return false;
+		}
+
+		if( message.length > 100 ) {
+			showNotice('聊天内容长度不能超过100个字符');
+			return false;	
+		}
+
+		ws.send( nickname + '：' + message);
+		$("#message").val('');
+		$("#message").focus();
+		showNotice('');
+		return false;
+	}
+
 </script>
 </head>
 
@@ -97,10 +136,13 @@
 
 			<div class="jumbotron">
 				<div class="row">
-					<div class="col-lg-12"><h3 style="text-align:center;">英语聊天室(englishzone.cn)</h3></div>
+					<div class="col-lg-12"><h3 style="text-align:center;">chatroom v1.0</h3></div>
 				</div>
-				<div class="row pre-scrollable" style="height:600px;border:1px solid #000;background-color:#fff;margin-top:30px;">
-					<div class="col-lg-12"></div>
+				<div class="row">
+					<div class="col-lg-12" style="height:30px;"><h5 style="text-align:center;color:red;" id="notice"></h5></div>
+				</div>
+				<div class="row pre-scrollable" style="height:600px;border:1px solid #000;background-color:#fff;" id="scrollDiv">
+					<div class="col-lg-12" id="output"></div>
 				</div>
 				<div class="row" style="margin-top:20px;">
 					<div class="col-lg-12">
@@ -111,49 +153,26 @@
 								<input type="text" class="form-control" id="nickname" placeholder="昵称" style="width:130px;">
 							  </div>
 							  <div class="form-group">
-								<label for="chat_content" class="sr-only">chat_content</label>
-								<input type="text" size=50 class="form-control" id="chat_content" placeholder="聊天内容" style="width:500px;">
+								<label for="message" class="sr-only">message</label>
+								<input type="text" size=50 class="form-control" id="message" placeholder="聊天内容" style="width:500px;">
 							  </div>
-							  <button type="submit" class="btn btn-Primary">发送</button>
+							  <button class="btn btn-Primary" onclick="return sendMessage()">发送</button>
 						</form>
 					</center>
 					</div>
 				</div>
+
+				<div class="row" style="margin-top:60px;">
+					<div class="col-lg-12"><h5 style="text-align:center;"><span>&copy;2017&nbsp;EnglishZone.cn&nbsp;</span></h5></div>
+				</div>
+
 			</div>
 
-		</div>
+		</div><!-- col-lg-12 end //-->
 	</div>
 </div>
-
-
-
-
-<!--
-    <div id="header">
-      <h1>Websocket client</h1>
-      <div id="status"></div>
-    </div>
-
-
-    <div id="navigation">
-
-      <p id="connecting">
-	<input type='text' id="server" value=""></input>
-	<button type="button" onclick="toggle_connection()">connection</button>
-      </p>
-      <div id="connected">				
-	<p>
-	  <input type='text' id="send_txt" value=></input>
-	  <button type="button" onclick="sendTxt();">send</button>
-	</p>
-      </div>
-
-      <div id="content">						
-	<button id="clear" onclick="clearScreen()" >Clear text</button>
-	<div id="output"></div>
-      </div>
-
-    </div>
-//-->
+<div style="display:none;">
+<script src="https://s95.cnzz.com/z_stat.php?id=1261781118&web_id=1261781118" language="JavaScript"></script>
+</div>
 </body>
 </html>
