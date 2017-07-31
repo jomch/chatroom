@@ -48,7 +48,19 @@ start(_Type, _Args) ->
 			%%{"/static/[...]", cowboy_static, {priv_dir, chatroom, "static"}}
 		]}
 	]),
-	{ok, _} = cowboy:start_clear(http, [{port, 8088}], #{ env => #{dispatch => Dispatch} } ),
+	
+	%%%% ws
+	%%{ok, _} = cowboy:start_clear(http, [{port, 8088}], #{ env => #{dispatch => Dispatch} } ),
+
+	%% wss
+	{ok, _} = cowboy:start_tls(https,
+					[
+						{port, 8088},
+						{certfile,  common:get_app_config(certfile,app)},
+						{keyfile, common:get_app_config(keyfile,app)}
+					],
+					#{ env => #{dispatch => Dispatch} }
+				    ),
 	chatroom_sup:start_link().
 
 stop(_State) ->
