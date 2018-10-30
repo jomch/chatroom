@@ -2,8 +2,6 @@
 
 Erlang cowboy & Websocket 实现的聊天室
 
-项目演示：https://englishzone.cn
-
 
 初始化 erlang.mk
 ```
